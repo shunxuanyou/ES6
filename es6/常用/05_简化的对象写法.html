@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_简化的对象写法</title>
+</head>
+<body>
+<!--
+简化的对象写法
+* 省略同名的属性值
+* 省略方法的function
+* 例如:
+  let x = 1;
+  let y = 2;
+  let point = {
+    x,
+    y,
+    setX (x) {
+		this.x = x
+	}
+  };
+-->
+<script type="text/javascript">
+   let x = 3;
+   let y = 5;
+   
+    //es5
+   let obj1 = {
+       x : x,
+       y : y,
+       getPoint : function () {
+           return this.x + this.y
+       }
+   };
+   console.log(obj1, obj1.getPoint());//{x: 3, y: 5, getPoint: ƒ} 8
+
+    //es6
+    let obj2 = {
+        x,
+        y,
+        getPoint(){
+            return this.x+this.y
+        }
+    };
+    console.log(obj2, obj2.getPoint());//{x: 3, y: 5, getPoint: ƒ} 8
+	
+	//计算属性
+	let id=0;
+	const userIds={
+		[`user-${++id}`]:id,
+		[`user-${++id}`]:id,
+		[`user-${++id}`]:id,
+	}
+	console.log(userIds);
+	
+	
+	var keys=['name','age','birthday'];
+	var values=['laravist',2,'2019-10-05'];
+	const larvList={
+		[keys.shift()]:values.shift(),
+		[keys.shift()]:values.shift(),
+		[keys.shift()]:values.shift(),
+	}
+	console.log(larvList)
+</script>
+</body>
+</html>

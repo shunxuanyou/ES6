@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>箭头函数不宜使用的场景</title>
+		<style type="text/css">
+			.in{
+				background: cadetblue;
+			}
+		</style>
+	</head>
+	<body>
+		<button type="button" class="zoom">按钮</button>
+		<script type="text/javascript">
+			// 1.作为构造函数,一个方法需要绑定到对象
+			// const Person=(name,age)=>{
+			// 	this.name=name;
+			// 	this.age=age;
+			// }
+			// const Jelly=new Person('jelly',5);
+			// console.log(Jelly);//Person is not a constructor
+			
+			// 2.当你真的需要this的时候
+			const button=document.querySelector('.zoom');
+			button.addEventListener('click',()=>{//箭头函数this指向window 报错Cannot read property 'add' of undefined
+				this.classList.add('in');
+				setTimeout(function(){
+					this.classList.remove('in');
+				},2000)
+			})
+			
+			// 3.需要使用arguments的时候
+			// const sum=()=>{//箭头函数报错,箭头函数没有arguments对象arguments is not defined
+			// 	return Array.from(arguments).reduce((prev,value)=>prev+value,0)
+			// }
+			// console.log(sum(1,2,3));
+			
+			
+			// rest参数
+			const sum2=(...args)=>{
+				return args.reduce((prev,value)=>prev+value,0)
+			}
+			console.log(sum2(1,2,3))
+			
+		</script>
+	</body>
+</html>

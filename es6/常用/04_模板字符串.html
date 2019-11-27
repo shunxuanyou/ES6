@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_模板字符串</title>
+</head>
+<body>
+	
+<!--
+1. 模板字符串 : 简化字符串的拼接
+  * 模板字符串必须用 `` 包含
+  * 变化的部分使用${xxx}定义
+-->
+<script type="text/javascript">
+    let obj = {
+        name : 'anverson',
+        age : 41
+    };
+    console.log('我叫:' + obj.name + ', 我的年龄是：' + obj.age);
+    console.log(`我叫:${obj.name}, 我的年龄是：${obj.age}`);
+		
+	const Jelly={
+		name:"留言板",
+		todos:[
+			{name:"go to store",completed:false},
+			{name:"watch movie",completed:true},
+			{name:"running",completed:true},
+		],
+		data:new Date()
+	}
+	// const template=`
+	// 	<ul>
+	// 		${Jelly.todos.map(todo=>
+	// 		`<li>
+	// 				${todo.name} ${todo.completed?'○':'x'}
+	// 		</li>`
+	// 		).join('')}
+	// 	</ul>
+	// `;
+	// console.log(template);
+	
+	function render(todos){
+		console.log(todos)
+		return (
+			`<ul>
+					${Jelly.todos.map(todo=>
+					`<li>
+							${todo.name} ${todo.completed?'○':'x'}
+					</li>`
+					).join('')}
+				</ul>`
+		)
+	}
+	const template2=`
+		<div>${Jelly.name}</div>
+		<div>${render(Jelly.todos)}</div>
+		<div>${Jelly.data}</div>
+	`
+	document.body.innerHTML=template2;
+		
+		
+</script>
+</body>
+</html>

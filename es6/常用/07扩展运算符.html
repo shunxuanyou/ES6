@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>扩展运算符</title>
+		<style>
+			.heading span{
+				cursor: pointer;
+				display: inline-block;
+				transition: transform 0.25s;
+			}
+			.heading span:hover{
+				color: yellow;
+				transform: translateY(-20px) rotate(10deg) scale(2);
+			}
+		</style>
+	</head>
+	<body>
+		<h2 class="heading">LARAVIST!</h2>
+		<ul>
+			<li>go to store</li>
+			<li>watch tv</li>
+			<li>go shopping</li>
+		</ul>
+		<script type="text/javascript">
+			// 将文本拆分成独立的值
+			const heading=document.querySelector('.heading');
+			// console.log(heading.textContent);
+			heading.innerHTML=wrapWithSpan(heading.textContent);
+			function wrapWithSpan(word){
+				return [...word].map(i=>`<span>${i}</span>`).join('');
+			}
+			
+			
+			//获取元素 
+			const todos=[...document.querySelectorAll('li')];
+			const names=todos.map(todo=>todo.textContent);
+			// console.log(todos[0])
+			
+			
+			/*
+				const todo=[
+					{id:1,name:'go to store',completed:false},
+					{id:2,name:'watch tv',completed:true},
+					{id:3,name:'go shopping',completed:false},
+				]
+				const id=2;
+				const todoIndex=todo.findIndex(todo=>todo.id===id);
+				console.log(todoIndex);
+				const newTods=[...todos.slice(0,todoIndex),...todos.slice(todoIndex+1)];
+				console.log(newTods);
+				this.setState({todo:newTods})
+			*/
+		   
+		   //数组连接 
+		   const fruit=['apply','bananas','pear'];
+		   const newFruit=['orange','mongo'];
+		   
+		   // es5
+		   // 新添加的元素会成为二维数组
+		   // fruit.push(newFruit);
+		   // console.log(fruit);// ["apply", "bananas", "pear", Array(2)]
+		   
+		   // fruit.push.apply(fruit,newFruit);
+		   // console.log(fruit);// ["apply", "bananas", "pear", "orange", "mongo"]
+		   
+		   // es6
+		   fruit.push(...newFruit);
+		   console.log(fruit);//["apply", "bananas", "pear", "orange", "mongo"]
+		   
+		   //日期对象
+		   const dataFields=[2019,5,6];
+		   const data=new Date(...dataFields);
+		   console.log(data)
+		</script>
+	</body>
+</html>

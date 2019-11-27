@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03_变量的解构赋值</title>
+</head>
+<body>
+<!--
+1. 理解:
+  * 从对象或数组中提取数据, 并赋值给变量(多个)
+2. 对象的解构赋值
+  let {n, a} = {n:'tom', a:12}
+3. 数组的解构赋值
+  let [a,b] = [1, 'atguigu'];
+4. 用途
+  * 给多个形参赋值
+-->
+<script type="text/javascript">
+	// 对象的解构赋值
+	let obj={
+		name:'kobe',
+		age:39,
+		sex:undefined
+	};
+	// let name=obj.name;
+	// let age=obj.age;
+	let {name:f,age,sex='保密'}=obj;//默认值必须是undefined才能显示
+	console.log(f,age,sex);
+	
+	
+	// 数组的解构赋值
+	let arr=[1,3,5,'abc',true];
+	// let one=arr[0];
+	// let two=arr[1];
+	let [,a,b,...others]=arr;
+	console.log(a,b,others);
+	
+	// 多维数组的解构
+	var res=[[1,2],[3,4]].map(([a,b])=>a+b);
+	console.log(res);
+	
+	// 字符串的解构赋值
+	let {length:le}='蓑衣褪尽任浊流';
+	console.log(le);
+	
+	// 函数参数的解构赋值
+	function foo({name,age,sex}){//{name,age}=obj
+		// console.log(obj);//{name: "kobe", age: 39, sex: undefined}
+		console.log(name,age,sex='保密')
+	}
+	foo(obj);
+</script>
+<img src="img/360截图20191004145544832.jpg" >
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const userPromise=new Promise((reslove,reject)=>{
+				setTimeout(function(){
+					reslove(['mojobo','vanpelt','wycats']);
+					// reject('no user')
+				},2000)
+			});
+			const moviePromise=new Promise((reslove,reject)=>{
+				setTimeout(function(){
+					reslove({name:"天地滂沱如何渡？",rating:9.2});
+					// reject(Error('no movie'))
+				},500)
+			})
+			// all成功的时候返回的是一个结果数组，而失败的时候则返回最先被reject失败状态的值:只要有一个失败就报错
+			Promise.all([userPromise,moviePromise])
+				.then(response=>{
+					const [users,movie]=response;
+					console.log(users);
+					console.log(movie);
+				})
+				.catch(err=>{
+					console.log(err)
+				})
+			
+			// race哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态:「谁跑的慢，以谁为准执行回调」
+			// Promise.race([userPromise,moviePromise])
+			// 	.then(response=>{
+			// 		console.log(response);
+			// 		
+			// 	})
+			// 	.catch(err=>{
+			// 		console.log(err)
+			// 	})
+		</script>
+	</body>
+</html>

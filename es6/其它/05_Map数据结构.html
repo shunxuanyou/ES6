@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			1. Map容器 : 无序的 key不重复的多个key-value的集合体
+			  * Map()
+			  * Map(array)
+			  * set(key, value)
+			  * get(key)
+			  * delete(key)
+			  * has(key)
+			  * clear()
+			  * size
+			  2.遍历
+			  	*keys():返回键名的遍历器
+			  	*values():返回键值的遍历器
+			  	*entries():返回键值对的遍历器
+			  	*forEach():使用回调函数遍历每个成员
+				*for of
+			  3.将Map数据结构转换为数组
+				[...Map.keys()]
+				[...Map.values()]
+		-->
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+		<button>4</button>
+		<button>5</button>
+		<script type="text/javascript">
+			const people=new Map();
+			people.set('jelly',20)
+			people.set('mary',20)
+			people.set('miffy',220)
+			// console.log(people.get('jelly'))
+			console.log([...people.keys()],[...people.values()]);
+			console.log(people.get('jelly'));//20
+			for(let [key,val] of people){
+				console.log(key+':'+val)
+			}
+			
+			// 存储关于对象的信息,而不是将信息存储到对象上
+			const clickCounts=new Map();
+			const buttons=document.querySelectorAll('button');
+			Array.from(buttons).forEach(button=>{
+				// 初始化button的值
+				clickCounts.set(button,0);
+				button.addEventListener('click',function(){
+					// 点击获取button的值
+					const val=clickCounts.get(this);
+					console.log(val)
+					// 点击之后设置button的值
+					clickCounts.set(this,val+1);
+					console.log(val,clickCounts);
+					// 获取按钮点击的次数
+					for(let index of clickCounts){
+						console.log(index)
+					}
+				})
+			})
+			
+			
+			
+			
+			// WeakMap数据结构,具有自动清除的动能,可以避免内存泄漏
+			let jelly={name:'jelly',age:20};
+			const weak=new WeakMap();
+			weak.set(jelly);
+			jelly=null;
+			console.log(weak);
+			
+		</script>
+	</body>
+</html>

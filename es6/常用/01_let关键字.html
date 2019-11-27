@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_let关键字</title>
+</head>
+<body>
+
+<button>测试1</button>
+<br>
+<button>测试2</button>
+<br>
+<button>测试3</button>
+<br>
+<!--
+***let
+1. 作用:
+  * 与var类似, 用于声明一个变量
+2. 特点:
+  * 只在当前块级作用域内有效(类似于局部变量)
+  * 在同一代码块内，不能重复声明
+  * 不会预处理, 不存在变量提升
+  * 临时性死区:在代码块内，使用let命令声明变量之前，该变量都是不可用的(必须先声明后使用)
+3. 应用:
+  * 循环遍历加监听
+  * 使用let取代var是趋势
+-->
+<script type="text/javascript">
+		// location.href='15_Module.html?code=123456'
+
+		// var声明的变量可以重复定义,存在变量提升
+		// var声明的变量属于function scoped,即函数内部定义的变量外界不能访问,并且在没有函数的情况下例如判断语句里面的变量是属于全局变量 
+		
+		// 函数作用域(function scoped)
+		// var price=100;
+		// var count=10;
+		// if(count>5){
+		// 	var discount=price*0.6;
+		// 	console.log('The discount is '+ discount);//The discount is 60
+		// }
+		// console.log(discount);//60 全局变量
+		
+		// 块级作用域(block scoped)
+		{
+			var price=100;
+			var count=10;
+			if(count>5){
+				let discount=price*0.6;//局部变量
+				console.log(discount);//60
+			}
+			// console.log(discount);// discount is not defined let和const声明的变量必须在当前块级作用域中访问
+		}
+		
+		
+		
+	
+		
+		// 块级作用域
+		{
+			for(let i=0;i<10;i++){
+				// var i='后盾人';
+				// console.log(i);//1次后盾人
+				
+				// 说明输出的i和循环的i不是同一个变量,它们只在自己的代码块内有效
+				// 设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。
+				let i='后盾人';
+				console.log(i);//10次后盾人
+			}
+		}
+		
+		// 点击事件是回调函数,会将其放在事件队列里面,等主线程的代码执行完毕,再将回调函数通过钩子来执行
+		var btns = document.getElementsByTagName('button');
+		// for(var i = 0;i<btns.length;i++){
+		// 	// 每次循环的时候都创建一个独立的作用域
+		// 	(function(i){
+		// 		btns[i].onclick = function () {
+		// 				alert(i);
+		// 		}
+		// 	})(i);	
+		// }
+		
+		for(let i=0;i<btns.length;i++){
+			btns[i].onclick=function(){
+				alert(i)
+			}
+		}
+		
+		
+</script>
+</body>
+
+</html>

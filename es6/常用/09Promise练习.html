@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript">
+		 /*
+			* 需求：
+			* 1、发送ajax请求获取新闻内容
+			* 2、新闻内容获取成功后再次发送请求，获取对应的新闻评论内容
+			* 3、新闻内容获取失败则不需要再次发送请求。
+			* 
+			* */ 
+			//定义一个请求news的方法
+			function getNews(url) {
+			    //创建一个promise对象
+			    let promise = new Promise((resolve, reject) => {
+			        //初始化promise状态为pending
+			        //启动异步任务 创建XMLHttpRequest对象
+			        let request = new XMLHttpRequest();
+					// 监听onreadystatechange事件
+			        request.onreadystatechange = function () {
+			            if(request.readyState === 4){
+			                if(request.status === 200){
+			                    let news = request.response;
+			                    resolve(news);
+			                }else{
+			                    reject('请求失败了。。。');
+			                }
+			            }
+			        };
+			        request.responseType = 'json';//设置返回的数据类型
+					// request.setRequestHeader("Accept", "application/json");
+			        request.open("GET", url);//规定请求的方法，创建链接
+			        request.send();//发送
+			    })
+			    return promise;//返回promise,调用的时候才能使用then方法
+			}
+			
+			getNews('http://localhost:3000/news?id=2')
+			        .then((news) => {
+						console.log(news);
+						console.log(news.commentsUrl);
+			            return getNews('http://localhost:3000' + news.commentsUrl);
+			        }, (error) => {
+			            alert(error);
+			        })
+			        .then((comments) => {
+			            console.log(comments);
+			        }, (error) => {
+			            alert(error);
+			        })
+					.catch(err=>{
+						console.error(err);
+					})
+			
+					
+			
+			const users=axios.get('https://api.github.com/users');
+			// $('p').on('click',function(){})
+			users.
+				then(res=>{
+					console.log(res);
+					username=res.data[0].login;
+					// 返回的是一个promise对象
+					return axios.get('https://api.github.com/users/'+username+'/repos');
+				})
+				.then(res=>{
+					console.log(res.data);
+				})
+				.catch(err=>{
+					console.log(err);
+				})
+			
+					
+					
+		</script>
+	</body>
+</html>

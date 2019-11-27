@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_const关键字</title>
+</head>
+<body>
+<!--
+1. 作用:
+  * 定义一个常量
+2. 特点:
+  * 不能修改
+  * 其它特点同let
+3. 应用:
+  * 保存不用改变的数据
+-->
+<script type="text/javascript">
+   // const key='abc123';
+   // key='123';//  Assignment to constant variable.
+   
+   // 对象是引用数据类型,当重新给对象赋值,指针则会指向另一个地址,所以不是一个对象了(即可修改)
+   const person={
+   	name:"独孤求败",
+   	age:40
+   }
+   person.name='殇不患';
+   console.log(person);;//{name: "殇不患", age: 40}
+   
+   
+   // 任性不让对象修改的方法
+   Object.freeze(person);
+   person.name='凌雪鸦';
+   console.log(person);//{name: "殇不患", age: 40}
+</script>
+</body>
+</html>

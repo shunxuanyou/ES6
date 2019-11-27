@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			默认使用const声明变量
+			当变量需要重新赋值和更新的时候使用let
+			尽量不使用var
+		-->
+		<script type="text/javascript">
+			(function(){
+				// 立即执行函数,使内部变量私有化,避免污染全局
+				var name='jelly';
+				console.log(name);//jelly
+			})();
+			
+			
+			{
+				const name='kebo';
+				console.log(name);//kebo
+				for(let i=0;i<10;i++){
+					console.log(i);//0 1 2 3 4 5 6 7 8 9
+					setTimeout(function(){
+						console.log(i);//0 1 2 3 4 5 6 7 8 9
+					},1000)
+				}
+			}
+			
+		</script>
+	</body>
+</html>

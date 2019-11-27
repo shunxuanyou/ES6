@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style type="text/css">
+		div{
+			width: 500px;
+			height: 500px;
+			border: 1px solid darkcyan;
+		}
+	</style>
+</head>
+<body>
+<div></div>
+<script type="text/javascript">
+	
+	// function timeout(ms){
+	// 	return new Promise((resolve,reject)=>{
+	// 		// setTimeout(resolve,ms,'done');
+	// 		setTimeout(function(){
+	// 			resolve('obj');
+	// 		},1000)
+	// 	})
+	// }
+	// console.log(timeout(1000))
+	// timeout(1000).then((value)=>{
+	// 	console.log(value)
+	// })
+	
+	
+	// let promise=new Promise((resolve,reject)=>{
+	// 	console.log('promise新建后立即执行');
+	// 	resolve();
+	// })
+	// promise.then((res)=>{
+	// 	console.log('promise.then')
+	// })
+	// console.log('同步任务')
+	
+	// function getJSON(url){
+	// 	//创建一个promise对象
+	// 	const promise = new Promise((resolve, reject) => {
+	// 		const handler = function(){
+	// 			if(this.readyState === 4){
+	// 				if(this.status === 200){
+	// 					resolve(this.response);
+	// 				}else{
+	// 					reject('请求失败了。。。');
+	// 				}
+	// 			}
+	// 		} 
+	// 		const request = new XMLHttpRequest();
+	// 		request.open("GET", url);//规定请求的方法，创建链接
+	// 		request.onreadystatechange=handler;
+	// 		request.responseType = 'json';//设置返回的数据类型
+	// 		request.setRequestHeader("Content-Type", "application/json");
+	// 		request.send();//发送
+	// 	})
+	// 	return promise;//返回promise,调用的时候才能使用then方法
+	// }
+	// getJSON("https://api.zbztb.cn/api/public/v1/home/swiperdata").then(res=>{
+	// 	console.log(res);
+	// })
+	var code=null;
+	
+	new Promise(function (resolve, reject) {
+		if(code==null){
+			function url(){
+				window.location.href='01_let关键字.html'
+			}
+			function getQueryString(name) {
+			   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			   var r = window.location.search.substr(1).match(reg);
+			   if (r != null) return unescape(r[2]); return null;
+		     }
+			   // var code=null;
+			 code = getQueryString("code");
+			 if(!code){
+				 resolve(url());
+			 }
+		}
+	 })
+	
+	 
+	window.onbeforeunload   =   function(){   
+	      var   n   =   window.event.screenX   -   window.screenLeft;   
+	      var   b   =   n   >   document.documentElement.scrollWidth-20;   
+	      if(b   &&   window.event.clientY   <   0   ||   window.event.altKey)   
+	      {   
+	          alert("是关闭而非刷新");   
+	          window.event.returnValue   =   "是否关闭？";
+	      }else{
+	             alert("是刷新而非关闭");   
+	     }   
+	}
+	
+	
+	
+	console.log(code);
+	
+</script>
+</body>
+</html>

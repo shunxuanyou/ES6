@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_Set和Map数据结构</title>
+</head>
+<body>
+<!--
+1. Set容器 : 无序不可重复的多个value的集合体
+  * Set()
+  * Set(array)
+  * add(value):添加某个值，返回Set结构本身
+  * delete(value)：删除某个值，返回一个布尔值，表示删除是否成功
+  * has(value)：返回一个布尔值，表示该值是否为Set的成员
+  * clear()：清除所有成员，没有返回值
+  * size：、
+2.遍历
+	*keys():返回键名的遍历器
+	*values():返回键值的遍历器
+	*entries():返回键值对的遍历器
+	*forEach():使用回调函数遍历每个成员
+	*for of
+3.将Set数据结构转换为数组
+	[...set]
+	Array.from(set)
+-->
+
+<script type="text/javascript">
+	const colors=new Set();
+	// 方法
+	colors.add('red');
+	colors.add('green');
+	colors.add('blue');
+	colors.add('blue');
+	colors.delete('blue');
+	console.log(colors.has('red'));
+	console.log(colors.size);
+	// colors.clear();
+	console.log(colors);
+	
+	// 遍历
+	// for(let i of colors){
+	// 	console.log(i);
+	// }
+	// console.log(colors.keys())
+	// console.log(colors.values())
+	// for(x of colors.entries()){
+	// 	console.log(x)
+	// }
+	// colors.forEach(x=>{
+	// 	console.log(x);
+	// })
+	
+	// 数组去重
+	const numbers = [1,2,3,4,3,2,1,5,6];
+	const numbersSet=new Set(numbers);
+	// console.log(numbersSet);
+	// 将set数据结构转换为数组
+	console.log([...numbersSet]);
+	console.log(Array.from(numbersSet));
+	
+	
+	// WeakSet数据类型,具有自动清除的动能,可以避免内存泄漏
+	// 元素只能是对象,不能使用for of forEach迭代
+	// 没有clear()方法
+	let jelly={name:'jelly',age:20};
+	let mary={name:'mary',age:20};
+	
+	// const people=[jelly,mary];//使用数组的时候，即使删除了某些数据对象,引用还是存在的(内存泄漏)
+	const people=new WeakSet([jelly,mary]);
+	
+	mary=null;
+	console.log(people);
+</script>
+</body>
+
+</html>
